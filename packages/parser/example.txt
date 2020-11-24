@@ -1,0 +1,42 @@
+
+parser Habr {
+  --input pageIndex;
+  --url 'https://habr.com/ru/page${pageIndex}/';
+
+  posts: @find 'div.posts_list > ul.content-list > .content-list__item' | @each {
+    title: @find 'h2.post__title a' | @text
+    hubs: @find 'ul.post__hubs li.inline-list__item a' | @each {
+      href: @attr 'href'
+      title: @text
+    }
+  };
+  nextPage(): => Habr(pageIndex + 1)
+}
+
+parser Github {
+  --input user;
+  --input after;
+  --url 'https://github.com/${user}' {
+    tab: 'repositories',
+    after: after,
+  };
+
+  repos: @find '#user-repositories-list > ul > li' | @each {
+    --input i;
+    index: i;
+    title: @find '.d-inline-block h3 a' | @text;
+    href: @find '.d-inline-block h3 a' | @attr 'href';
+  }
+}
+
+parser RuTracker {
+  --input query;
+  --url 'https://rutracker.net/forum/tracker.php' {
+    nm: query
+  }
+
+  torrents: @find '#tor-tbl tbody tr' | @each {
+    title: @find '.t-title-col a' | @text;
+    size: @find '.tor-size a' | @text;
+  }
+}

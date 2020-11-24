@@ -1,0 +1,26 @@
+{
+  "name": "@pp/parser",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Serabass <serabass565@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/parser.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://npm.serabass.local/"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "pegjs": "^0.10.0"
+  }
+}
